@@ -160,7 +160,7 @@
                     <!--------------------------------------------------------------------------------->
                     <div style="padding:10px; border-radius: 1px;">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">@method('PUT')
-                        <input type="hidden" name="id" >
+                        <input type="hidden" name="id" name="id">
 
                         <div class="rotulo"><b>Requerente:</b></div>
                         <input class="campo2" id="requerente" name="requerente"  value=""  type="text" placeholder="nome completo">
@@ -211,9 +211,15 @@
     $(document).ready(function(){
             $(window).on('beforeunload', function(){
                 console.log('Carrega Pagina Lista Processos');
-                limparSessionStorageRequerente();
+                //limparSessionStorageRequerente();
+                window.addEventListener("message", function(event) {
+                    if (event.data.id && event.data.requerente) {
+                        $('#id').val(event.data.id);
+                        $('#requerente').val(event.data.requerente);
+                    }
+                });
             });
-
+            
             $('#listagem').DataTable({
                         paging: true,
                         scrollCollapse: true,
@@ -267,6 +273,7 @@
                 });
             */
                 window.location.href = "{{ route('pessoas.requerentes') }}";
+                //window.open("{{ route('pessoas.requerentes') }}", "Selecionar Requerente", "width=800,height=600");
 
             });
 

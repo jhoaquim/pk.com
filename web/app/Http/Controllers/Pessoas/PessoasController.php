@@ -97,7 +97,8 @@ class PessoasController extends Controller
         ->where('PE.id', $id)   // Filtrar pelo ID
         ->first();              // first() para obter apenas um registro
         //dd($pessoas);
-        return view('pessoas.carregaRequerente', compact('pessoas'));
+        //return view('pessoas.carregaRequerente', compact('pessoas'));
+        return response()->json($pessoas);
     }
 
     public function selecionaRequerente(Request $request, $id){
