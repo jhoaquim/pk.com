@@ -113,6 +113,14 @@ body {
     align-items: center;
     border-radius: 8px;
 }
+.borda3{
+    border-left: 15px solid rgb(143, 136, 136); /* Borda de 5px, sólida, azul na esquerda */
+    border-bottom: 10px dashed rgb(143, 136, 136);
+    display: flex; /* Transforma o elemento em um container flexbox */
+    justify-content: center; /* Alinha os itens horizontalmente no centro */
+    align-items: center;
+    border-radius: 8px;
+}
 .texto-esquerda {
     text-align: left;
 }

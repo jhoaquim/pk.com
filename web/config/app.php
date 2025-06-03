@@ -51,7 +51,7 @@ return [
     | the application so that it's available within Artisan commands.
     |
     */
-
+    'pkcia' => env('PKCIA', 'Computratum.Ius - PKCia.com.br'),
     'url' => env('APP_URL', 'http://localhost'),
 
     /*
