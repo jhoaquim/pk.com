@@ -265,7 +265,7 @@
                         }
                     }
                 });
-            */ 
+            */
                 window.location.href = "{{ route('pessoas.requerentes') }}";
 
             });

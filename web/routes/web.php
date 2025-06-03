@@ -107,8 +107,6 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('dashboard/cadastros', [App\Http\Controllers\Pessoas\PessoasController::class ,'listar'])->name('pessoas.listar');
-    Route::get('dashboard/cadastros/requerentes', [App\Http\Controllers\Pessoas\PessoasController::class ,'requerentes'])->name('pessoas.requerentes');
-    Route::get('dashboard/cadastros/requerentes/{id?}', [App\Http\Controllers\Pessoas\PessoasController::class ,'requerente']);
     Route::get('dashboard/cadastros/pessoas/adicionar}', [App\Http\Controllers\Pessoas\PessoasController::class ,'create'])->name("pessoas.adicionar");
     Route::post('dashboard/cadastros/pessoas/gravar', [App\Http\Controllers\Pessoas\PessoasController::class ,'store'])->name("pessoas.gravar");
     Route::get('dashboard/cadastros/pessoas/mostrar/{id?}', [App\Http\Controllers\Pessoas\PessoasController::class ,'show'])->name("pessoas.mostrar");
@@ -122,7 +120,9 @@ Route::middleware([
     Route::get('dashboard/cadastros/processos/mostrar/{id?}', [App\Http\Controllers\Processos\ProcessosController::class ,'show'])->name("processos.mostrar");
     Route::get('dashboard/cadastros/processos/adicionar', [App\Http\Controllers\Pessoas\PessoasController::class ,'create'])->name("processos.adicionar");
     Route::get('dashboard/cadastros/pessoas/qrcode/{id?}', [App\Http\Controllers\Pessoas\PessoasController::class ,'gerarQRCode'])->name("pessoas.qrcode");
-    Route::get('dashboard/cadastros/requerentes/{id?}/selecionarequerente', [App\Http\Controllers\Pessoas\PessoasController::class ,'selecionaRequerente'])->name('requerente.seleciona');
+    Route::get('dashboard/cadastros/requerentes', [App\Http\Controllers\Pessoas\PessoasController::class ,'requerentes'])->name('pessoas.requerentes');
+    Route::get('dashboard/cadastros/requerentes/{id?}', [App\Http\Controllers\Pessoas\PessoasController::class ,'requerente']);
+    Route::post('dashboard/cadastros/requerentes/{id?}/selecionarequerente', [App\Http\Controllers\Pessoas\PessoasController::class ,'selecionaRequerente']);
 });
 
 Route::middleware([

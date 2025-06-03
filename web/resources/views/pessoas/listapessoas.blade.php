@@ -193,7 +193,7 @@
 
 <script type="module">
     const caminhoPublic = '<?php echo env('CAMINHO_PUBLIC'); ?>';
-            $(document).ready(function(){
+        $(document).ready(function(){
                 $('#listagem').DataTable({
                     paging: true,
                     scrollCollapse: true,
@@ -318,9 +318,7 @@
                 });
 
                 $("#dt_nascimento").mask("00/00/0000");
-
-            });
-
+ 
                 $("#cep").blur(function() {
                     var cep = $(this).val().replace(/\D/g, ''); //Nova variável "cep" somente com dígitos.
 
@@ -385,9 +383,7 @@
                 });
 
                 $("#dt_nascimento").keyup(capturarValorData);
-
-            });
-
+        });
             function mostraValorCampo() {
                 // Substitua 'true' ou 'false' pelo valor real que você deseja verificar
                 const valorCampo = 'true'; // Exemplo: substituir por mostraValorCampo() quando tiver o elemento 'nome'

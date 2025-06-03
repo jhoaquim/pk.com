@@ -54,12 +54,7 @@ class PessoasController extends Controller
         //dd($pessoas);
 
         return view('pessoas.listaRequerentes', compact('pessoas'));
-    /*    $pessoas = Pessoas::orderBy('nome')->get();
-        return response()->json([
-            'success' => true,
-            'pessoas' => $pessoas
-        ]);
-    */    
+
     }
     public function requerente($id)
     {
@@ -107,7 +102,6 @@ class PessoasController extends Controller
 
     public function selecionaRequerente(Request $request, $id){
         $request->validate([
-            'id' => 'required|integer|exists:pessoas,id',
             'nome' => 'required|string|max:255',
         ]);
 
@@ -115,6 +109,8 @@ class PessoasController extends Controller
         $nome   = $request->input('nome');
 
         $pessoa = Pessoas::find($id);
+
+        //dd($id);
 
         if ($pessoa) {
             // Aqui você não precisa alterar o nome ou salvar, apenas confirmar e retornar.
@@ -133,6 +129,7 @@ class PessoasController extends Controller
             'message' => 'Pessoa não encontrada'
         ], 404);
     }
+
     public function create(Request $request)
     {
         try {

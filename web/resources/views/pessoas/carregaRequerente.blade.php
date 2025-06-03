@@ -110,77 +110,18 @@ const caminhoPublic = '<?php echo env('CAMINHO_PUBLIC'); ?>';
 
 $(document).ready(function() {
 
-    // Preencher automaticamente se localStorage tiver valores
-    //let reqId = localStorage.getItem('requerente_id');
-    //let reqNome = localStorage.getItem('requerente_nome');
-    let reqId   = sessionStorage.getItem('requerente_id');
-    let reqNome = sessionStorage.getItem('requerente_nome');
+                var id = $('input[name="id"]').val();
+                var nome = $('input[name="requerente"]').val();
 
-    if (reqId && reqNome) {
-        $('#requerente').val(reqNome);
-        $('#id').val(reqId);
-        console.log('Campos preenchidos automaticamente:', reqId, reqNome);
+                // Envia os dados para a janela que abriu o modal
+                window.opener.postMessage({
+                    requerente: id,
+                    requerente: nome
+                }, '*'); // '*' pode ser substituído por origem segura, ex: 'https://seusite.com'
 
-        sessionStorage.removeItem('requerente_id');
-        sessionStorage.removeItem('requerente_nome');
-    }
+                // Fecha o modal ou a janela
+                window.close();
 
-    $(document).on('click', '#btn_seleciona', function(e) {
-        e.preventDefault();
-        var rota = 'dashboard/cadastros/requerentes/';
-        var id = $('input[name="id"]').val();
-        var nome = $('input[name="requerente"]').val();
-        let url = `${caminhoPublic}${rota}${id}/selecionarequerente`;
-
-        if (!id || !nome) {
-            setTimeout(function() {
-                $('#mensagem').html('<p style="color:red;">campo(s) prenchimento(s) incorreto(s).</p>');
-            }, 5000);
-            return;
-        }
-
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        $('#btn_seleciona').prop('disabled', true);
-        $('.carregando').show();
-
-        $.ajax({
-            url: url,
-            method: 'GET',
-            data: { id, nome },
-            success: function(response) {
-                sessionStorage.setItem('requerente_id', id);
-                sessionStorage.setItem('requerente_nome', nome);
-
-                $('#mensagem').html('<p style="color:green;">' + response.message + '</p>');
-
-                setTimeout(function() {
-                    history.go(-2);
-                }, 500);
-            },
-            error: function(xhr) {
-                if (xhr.status === 422) {
-                    let errors = xhr.responseJSON.errors;
-                    let msg = '<ul style="color:red;">';
-                    $.each(errors, function(key, value) {
-                        msg += '<li>' + value[0] + '</li>';
-                    });
-                    msg += '</ul>';
-                    $('#mensagem').html(msg);
-                } else {
-                    $('#mensagem').html('<p style="color:red;">Erro ao processar a requisição.</p>');
-                }
-            },
-            complete: function() {
-                setTimeout(function() {
-                    $('#mensagem').html('');
-                }, 5000);
-            }
-        });
-    });
 });
+
 </script>
